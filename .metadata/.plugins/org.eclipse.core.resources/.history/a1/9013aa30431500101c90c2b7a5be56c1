@@ -1,0 +1,9 @@
+package ar.edu.unlp.info.oo2.biblioteca;
+
+public class ExporterAdapter extends VoorheesExporter {
+	private JSONExporter exporter;
+	
+	public ExporterAdapter() {
+		this.exporter = new JSONExporter();
+	}
+}

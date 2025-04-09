@@ -1,0 +1,19 @@
+package ar.edu.unlp.info.oo2.biblioteca;
+
+import java.util.List;
+
+public class ExporterAdapter extends VoorheesExporter {
+	private JSONExporter exporterAdaptee;
+	
+	public ExporterAdapter() {
+		this.exporterAdaptee = new JSONExporter();
+	}
+	
+	private String exportar(Socio socio) {
+		return (this.exporterAdaptee.generarJSON(socio));
+	}
+	
+	public String exportar(List<Socio> socios) {
+		return(this.exporterAdaptee.generarJsonArray(socios));
+	}
+}

@@ -1,0 +1,19 @@
+package ar.edu.unlp.info.oo2.biblioteca;
+
+import org.json.simple.*;
+
+public class JSONExporter {
+	private JSONArray listaJSON;
+	
+	public JSONExporter() {
+		
+	}
+	
+	private void agregarSocio(Socio socio) {
+		JSONObject socioJSON = new JSONObject();
+		socioJSON.put("nombre", socio.getNombre());
+		socioJSON.put("email", socio.getEmail());
+		socioJSON.put("legajo", socio.getLegajo());
+		this.listaJSON.add(socioJSON);
+	}
+}
