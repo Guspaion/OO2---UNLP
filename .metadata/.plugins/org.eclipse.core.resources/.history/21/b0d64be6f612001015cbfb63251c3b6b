@@ -1,9 +1,0 @@
-package ar.edu.info.unlp.ejercicioDemo;
-
-public class FormaPago {
-	private double extra;
-	
-	public double getExtra() {
-		return this.extra;
-	}
-}

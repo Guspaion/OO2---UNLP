@@ -1,7 +1,0 @@
-package ar.edu.info.unlp.ejercicio2;
-
-public interface Opcion {
-	public String ganaContra(Opcion op);
-	public String pierdeContra(Opcion op);
-	public String empataContra(Opcion op);
-}

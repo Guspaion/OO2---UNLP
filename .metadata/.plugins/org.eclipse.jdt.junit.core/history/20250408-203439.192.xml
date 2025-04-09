@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="BibliotecaTest" project="patterns-ejercicio1" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="ar.edu.unlp.info.oo2.biblioteca.BibliotecaTest" time="0.017" displayname="BibliotecaTest" uniqueid="[engine:junit-jupiter]/[class:ar.edu.unlp.info.oo2.biblioteca.BibliotecaTest]">
-    <testcase name="testExporter" classname="ar.edu.unlp.info.oo2.biblioteca.BibliotecaTest" time="0.017" displayname="testExporter()" uniqueid="[engine:junit-jupiter]/[class:ar.edu.unlp.info.oo2.biblioteca.BibliotecaTest]/[method:testExporter()]"/>
-  </testsuite>
-</testrun>
