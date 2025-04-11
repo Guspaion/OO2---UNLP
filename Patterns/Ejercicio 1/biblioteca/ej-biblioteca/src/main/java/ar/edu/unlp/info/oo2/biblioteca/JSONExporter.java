@@ -19,15 +19,8 @@ public class JSONExporter {
 	}
 	
 	public String exportarStringJSON(List<Socio> socios) {
-		List<JSONObject> listaObjetos = socios.stream()
-			    .map(this::generarJSONObject)
-			    .collect(Collectors.toList());
-
 		JSONArray listaJSON = new JSONArray();
-		if(listaObjetos.isEmpty()) {
-			return "[]";
-		}
-		listaObjetos.forEach(listaJSON::add);
-		return listaJSON.toJSONString();	
+		socios.forEach(listaJSON::add);
+		return listaJSON.toJSONString();
 	}
 }
