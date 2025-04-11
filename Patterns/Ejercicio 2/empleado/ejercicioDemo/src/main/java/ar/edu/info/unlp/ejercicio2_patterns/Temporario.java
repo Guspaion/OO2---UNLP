@@ -15,7 +15,10 @@ public class Temporario extends Empleado {
 
 	@Override
 	public double sueldoAdicional() {
-		// TODO Auto-generated method stub
-		return 0;
+		double adicional = super.adicionalPorHijo();
+		if(super.esCasado()) {
+			adicional += 2000;
+		}
+		return adicional;
 	}
 }
