@@ -17,6 +17,13 @@ public class Pelicula {
 		this.pelisSimilares = new LinkedList<Pelicula>();
 	}
 	
+	public void agregarSimilar(Pelicula p) {
+		this.pelisSimilares.add(p);
+		if(!p.esSimilar(this)) {
+			p.agregarSimilar(this);
+		}
+	}
+	
 	public boolean esSimilar(Pelicula p) {
 		return(pelisSimilares.contains(p));
 	}

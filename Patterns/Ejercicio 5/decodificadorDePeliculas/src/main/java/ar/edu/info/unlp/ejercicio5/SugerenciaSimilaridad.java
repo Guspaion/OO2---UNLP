@@ -12,7 +12,6 @@ public class SugerenciaSimilaridad implements CriterioSugerencia {
 	@Override
 	public List<Pelicula> sugerirPeliculas(List<Pelicula> grilla, Set<Pelicula> pelisReproducidas) {
 		return grilla.stream()
-						.filter(p -> !pelisReproducidas.contains(p))
 						.filter(p -> pelisReproducidas.stream().anyMatch(r -> p.esSimilar(r)))
 						.sorted(Pelicula.porNovedad())
 						.limit(3)

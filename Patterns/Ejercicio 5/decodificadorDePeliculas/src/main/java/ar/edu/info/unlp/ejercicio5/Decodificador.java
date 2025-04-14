@@ -20,6 +20,10 @@ public class Decodificador {
 		this.criterio = criterioNuevo;
 	}
 	
+	public void agregarPelicula(Pelicula p) {
+		this.grilla.add(p);
+	}
+	
 	public void reproducirPelicula(Pelicula p) {
 		this.pelisReproducidas.add(p);
 	}
