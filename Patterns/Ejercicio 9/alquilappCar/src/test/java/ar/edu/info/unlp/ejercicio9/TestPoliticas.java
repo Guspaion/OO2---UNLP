@@ -1,7 +1,5 @@
 package ar.edu.info.unlp.ejercicio9;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +18,7 @@ public class TestPoliticas {
 	}
 	
 	@Test
-	void testGrande() {
+	void notSoTest() {
 		System.out.println("Política flexible: "+this.reserva.montoAReembolsar());
 		this.reserva.moderada();
 		System.out.println("Política moderada: "+this.reserva.montoAReembolsar());
