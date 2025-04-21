@@ -10,4 +10,6 @@ public interface Topografia {
 	public boolean esTierra();
 	
 	public boolean esMixta(Mixta otraMixta);
+	
+	public boolean esPantano();
 }

@@ -29,4 +29,9 @@ public class Agua implements Topografia {
 	public boolean esMixta(Mixta otraMixta) {
 		return false;
 	}
+
+	@Override
+	public boolean esPantano() {
+		return false;
+	}
 }

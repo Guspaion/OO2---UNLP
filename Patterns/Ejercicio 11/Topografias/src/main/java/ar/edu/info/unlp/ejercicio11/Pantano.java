@@ -1,18 +1,18 @@
 package ar.edu.info.unlp.ejercicio11;
 
-public class Tierra implements Topografia {
-	public Tierra() {
+public class Pantano implements Topografia {
+	public Pantano() {
 		
 	}
 
 	@Override
 	public double calcularProporcion() {
-		return 0.0;
+		return 0.7;
 	}
 
 	@Override
 	public boolean esLaMisma(Topografia otraTopografia) {
-		return otraTopografia.esTierra();
+		return otraTopografia.esPantano();
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class Tierra implements Topografia {
 
 	@Override
 	public boolean esTierra() {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -32,6 +32,6 @@ public class Tierra implements Topografia {
 
 	@Override
 	public boolean esPantano() {
-		return false;
+		return true;
 	}
 }

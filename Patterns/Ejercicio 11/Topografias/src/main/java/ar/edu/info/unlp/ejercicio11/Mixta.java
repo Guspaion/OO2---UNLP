@@ -36,4 +36,9 @@ public class Mixta implements Topografia {
 		return this.partes.stream()
 							.allMatch(t -> t.esLaMisma(otraMixta));
 	}
+
+	@Override
+	public boolean esPantano() {
+		return false;
+	}
 }
