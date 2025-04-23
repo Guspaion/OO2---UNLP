@@ -17,7 +17,7 @@ public class SistemaOperativo {
 		return this.fileSystem.archivoMasGrande();
 	}
 	
-	public FileSystem getArchivoMasNueov() {
+	public FileSystem getArchivoMasNuevo() {
 		return this.fileSystem.archivoMasNuevo();
 	}
 	

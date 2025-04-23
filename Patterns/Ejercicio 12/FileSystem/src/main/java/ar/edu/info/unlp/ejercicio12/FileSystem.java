@@ -2,6 +2,7 @@ package ar.edu.info.unlp.ejercicio12;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public abstract class FileSystem {
 	}
 	
 	public int getDiasDesdeCreacion() {
-		return Period.between(this.fechaCreacion, LocalDate.now()).getDays();
+		return (int) ChronoUnit.DAYS.between(this.fechaCreacion, LocalDate.now());
 	}
 	
 	public abstract double tamañoTotalOcupado();

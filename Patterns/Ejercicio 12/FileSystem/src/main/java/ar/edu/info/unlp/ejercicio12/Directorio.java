@@ -17,9 +17,17 @@ public class Directorio extends FileSystem {
 		contenido = new LinkedList<FileSystem>();
 	}
 	
-	public Stream<FileSystem> filtrarArchivos(){
-		return this.contenido.stream()
-								.filter(c -> c.esArchivo());
+	public List<FileSystem> filtrarArchivos(List<FileSystem> lista){
+		System.out.println("Entrando al directorio: "+this.getNombre());
+		for (FileSystem fs: this.contenido) {
+			if(fs.esArchivo()) {
+				lista.add(fs);
+				System.out.println("Archivo encontrado: "+fs.getNombre());
+			} else {
+				((Directorio) fs).filtrarArchivos(lista);
+			}
+		}
+		return lista;
 	}
 
 	@Override
@@ -31,21 +39,27 @@ public class Directorio extends FileSystem {
 
 	@Override
 	public FileSystem archivoMasGrande() {
-		return this.filtrarArchivos()
-					.max((a1, a2) -> Double.compare(a1.tamañoTotalOcupado(), a2.tamañoTotalOcupado()))		
-					.orElse(null);
+		List<FileSystem> archivos = new LinkedList<FileSystem>();
+		archivos = this.filtrarArchivos(archivos);
+		return archivos.stream()
+						.max((a1, a2) -> Double.compare(a1.tamañoTotalOcupado(), a2.tamañoTotalOcupado()))		
+						.orElse(null);
 	}
 
 	@Override
 	public FileSystem archivoMasNuevo() {
-		return this.filtrarArchivos()
-					.min((a1, a2) -> Integer.compare(a1.getDiasDesdeCreacion(), a2.getDiasDesdeCreacion()))
-					.orElse(null);
+		List<FileSystem> archivos = new LinkedList<FileSystem>();
+		archivos = this.filtrarArchivos(archivos);
+		return archivos.stream()
+						.min((a1, a2) -> Integer.compare(a1.getDiasDesdeCreacion(), a2.getDiasDesdeCreacion()))
+						.orElse(null);
 	}
 
 	@Override
 	public FileSystem buscarArchivo(String nombreArch) {
-		return this.filtrarArchivos()
+		List<FileSystem> archivos = new LinkedList<FileSystem>();
+		archivos = this.filtrarArchivos(archivos);
+		return archivos.stream()
 					.map(a -> a.buscarArchivo(nombreArch))
 					.findFirst()
 					.orElse(null);
@@ -53,7 +67,9 @@ public class Directorio extends FileSystem {
 
 	@Override
 	public List<FileSystem> buscarTodos(String nombreArch) {
-		return this.filtrarArchivos()
+		List<FileSystem> archivos = new LinkedList<FileSystem>();
+		archivos = this.filtrarArchivos(archivos);
+		return archivos.stream()
 					.map(a -> a.buscarArchivo(nombreArch))
 					.collect(Collectors.toList());
 	}
@@ -71,5 +87,9 @@ public class Directorio extends FileSystem {
 	@Override
 	public boolean esArchivo() {
 		return false;
+	}
+	
+	public void agregarContenido(FileSystem fs) {
+		this.contenido.add(fs);
 	}
 }
