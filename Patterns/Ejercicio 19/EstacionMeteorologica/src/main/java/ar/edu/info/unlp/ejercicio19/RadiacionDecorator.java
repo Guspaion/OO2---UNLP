@@ -6,6 +6,6 @@ public class RadiacionDecorator extends WeatherDisplayDecorator {
 	}
 	
 	public String displayData() {
-		return super.displayData() + ("Radiación solar: "+super.getRadiacionSolar());
+		return super.displayData() + ("Radiación solar: "+super.getRadiacionSolar()+", ");
 	}
 }

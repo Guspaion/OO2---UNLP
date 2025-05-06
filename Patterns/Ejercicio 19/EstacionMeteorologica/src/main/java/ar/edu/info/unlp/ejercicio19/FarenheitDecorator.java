@@ -6,6 +6,6 @@ public class FarenheitDecorator extends WeatherDisplayDecorator {
 	}
 	
 	public String displayData() {
-		return super.displayData() + ("Temperatura F: "+super.getTemperatura());
+		return super.displayData() + ("Temperatura F: "+super.getTemperatura()+", ");
 	}
 }

@@ -26,7 +26,7 @@ public class HomeWeatherAdapter implements WeatherData {
 
 	@Override
 	public List<Double> getTemperaturas() {
-		return this.getTemperaturas();
+		return this.estacion.getTemperaturas();
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 package ar.edu.info.unlp.ejercicio19;
 
-public class MaxMinDecorator extends WeatherDisplayDecorator {
+public class FarenheitMaxMinDecorator extends WeatherDisplayDecorator {
 
-	public MaxMinDecorator(WeatherData component) {
+	public FarenheitMaxMinDecorator(WeatherData component) {
 		super(component);
 	}
 	
@@ -19,9 +19,7 @@ public class MaxMinDecorator extends WeatherDisplayDecorator {
 	}		
 
 	public String displayData() {
-		return super.displayData() + ("Máximo histórico F: "+this.maxHistorico()+
-									"\nMínimo histórico F: "+this.minHistorico());
+		return super.displayData() + ("Máximo: "+Math.round(this.maxHistorico())+
+									", Mínimo: "+Math.round(this.minHistorico())+", ");
 	}
-	
-	//Debería hacer uno para celsius también
 }

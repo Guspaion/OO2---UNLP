@@ -18,6 +18,6 @@ public class PromedioCelsiusDecorator extends WeatherDisplayDecorator {
 	}
 	
 	public String displayData() {
-		return super.displayData() + ("Promedio temperaturas C: "+this.calcularPromedioCelsius());
+		return super.displayData() + ("Promedio temperaturas C: "+Math.round(this.calcularPromedioCelsius())+", ");
 	}
 }

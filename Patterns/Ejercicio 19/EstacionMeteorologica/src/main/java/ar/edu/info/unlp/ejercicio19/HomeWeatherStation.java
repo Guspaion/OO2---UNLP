@@ -43,4 +43,7 @@ public class HomeWeatherStation implements WeatherData {
 				"Radiacion Solar: "+this.getRadiacionSolar());
 	}
 
+	public void agregarTemp(Double temp) {
+		this.temperaturas.add(temp);
+	}
 }

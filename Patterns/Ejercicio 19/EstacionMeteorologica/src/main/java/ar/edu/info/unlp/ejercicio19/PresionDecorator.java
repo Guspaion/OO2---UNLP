@@ -6,6 +6,6 @@ public class PresionDecorator extends WeatherDisplayDecorator {
 	}
 	
 	public String displayData() {
-		return super.displayData() + ("Presión: "+super.getPresion());
+		return super.displayData() + ("Presión atmosf.: "+super.getPresion()+", ");
 	}
 }

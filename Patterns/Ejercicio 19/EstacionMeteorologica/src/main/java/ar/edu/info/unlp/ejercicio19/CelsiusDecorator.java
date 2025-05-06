@@ -10,6 +10,6 @@ public class CelsiusDecorator extends WeatherDisplayDecorator {
 	}
 
 	public String displayData() {
-		return super.displayData() + ("Temperatura C: "+this.getCelsius());
+		return super.displayData() + ("Temperatura C: "+this.getCelsius()+", ");
 	}
 }

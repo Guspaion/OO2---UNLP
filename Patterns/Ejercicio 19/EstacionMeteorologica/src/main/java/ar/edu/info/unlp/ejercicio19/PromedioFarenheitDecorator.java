@@ -14,6 +14,6 @@ public class PromedioFarenheitDecorator extends WeatherDisplayDecorator {
 	}
 	
 	public String displayData() {
-		return super.displayData() + ("Promedio temperaturas F: "+this.calcularPromedioFarenheit());
+		return super.displayData() + ("Promedio temperaturas F: "+Math.round(this.calcularPromedioFarenheit())+", ");
 	}
 }

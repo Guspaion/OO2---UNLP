@@ -26,7 +26,7 @@ public abstract class WeatherDisplayDecorator implements WeatherData {
 
 	@Override
 	public List<Double> getTemperaturas() {
-		return this.getTemperaturas();
+		return this.component.getTemperaturas();
 	}
 
 	@Override
