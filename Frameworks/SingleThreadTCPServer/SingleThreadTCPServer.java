@@ -1,0 +1,111 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public abstract class SingleThreadTCPServer {
+
+    public abstract void handleMessage(String message, PrintWriter out);
+
+    public final void startLoop(String[] args) {
+        checkArguments(args);
+
+        int portNumber = Integer.parseInt(args[0]);
+
+    
+        try (ServerSocket serverSocket = new ServerSocket(portNumber)) {
+            displaySocketInformation(portNumber);
+            while (true) {
+                Socket clientSocket = acceptAndDisplaySocket(serverSocket);
+                handleClient(clientSocket);
+            }
+        } catch (IOException e) {
+            displayAndExit(portNumber);
+        }
+    }
+
+    protected void displayAndExit(int portNumber) {
+        System.err.println("Could not listen on port " + portNumber);
+        System.exit(-1);
+    }
+
+    protected Socket acceptAndDisplaySocket(ServerSocket serverSocket) throws IOException {
+        Socket clientSocket = serverSocket.accept();
+        displaySocketData(clientSocket);
+        return clientSocket;
+    }
+
+    protected void displaySocketData(Socket clientSocket) {
+        System.out.println("Client connected from: " + clientSocket.getInetAddress().getHostAddress() + ":"
+                + clientSocket.getPort());
+    }
+
+    protected void displaySocketInformation(int portNumber) {
+        System.out.println(this.getClass().getName() + " server listening on port: " + portNumber);
+    }
+
+    protected void checkArguments(String[] args) {
+        if (args.length != 1) {
+            displayUsage();
+            System.exit(1);
+        }
+    }
+
+    protected void displayUsage() {
+        System.err.println("Usage: java"+this.getClass().getName() +"<port number>");
+    }
+
+    protected boolean shouldTerminateSession(String input){
+        return input.equals(this.getTerminationPass());
+    }    
+
+    protected String getTerminationPass() {
+        return ""; //Por defecto retorna un string vacio
+    }
+
+    protected void onSessionStart(Socket clientSocket) {
+        //No hace nada por defecto
+    }
+
+    protected void onSessionEnd(Socket clientSocket){
+        //No hace nada por defecto
+    }
+
+    protected void logMessage(String message, Socket clientSocket) {
+        System.out.println("Mensaje recibido: " + message + " de "
+                + clientSocket.getInetAddress().getHostAddress() + ":" + clientSocket.getPort());
+    }
+
+    protected final void handleClient(Socket clientSocket) {
+        try (
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))
+        ) {
+            onSessionStart(clientSocket); // Hook
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                logMessage(inputLine, clientSocket); // Hook
+
+                if (shouldTerminateSession(inputLine)) {
+                    break;
+                }
+
+                handleMessage(inputLine, out);
+            }
+
+            onSessionEnd(clientSocket); // Hook
+
+        } catch (IOException e) {
+            System.err.println("Problem with communication with client: " + e.getMessage());
+        } finally {
+            try {
+                clientSocket.close();
+            } catch (IOException e) {
+                System.err.println("Error closing socket: " + e.getMessage());
+            }
+        }
+    }
+}
