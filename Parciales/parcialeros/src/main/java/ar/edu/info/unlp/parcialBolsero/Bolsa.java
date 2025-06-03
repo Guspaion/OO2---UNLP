@@ -13,13 +13,18 @@ public class Bolsa extends Item {
 		this.items = new LinkedList<Item>();
 	}
 	
+	public int getCapacidad() {
+		return this.capacidad;
+	}
+	
 	private int getEspacioOcupado() {
 		return this.items.stream()
 							.mapToInt(i -> i.getTamaño()).sum();
 	}
 	
+	
 	public boolean hayLugar(int tamañoItem) {
-		return ((this.getEspacio() + tamañoItem) <= this.capacidad);
+		return ((this.getEspacioDisponible() + tamañoItem) <= this.capacidad);
 	}
 	
 	@Override
@@ -50,35 +55,32 @@ public class Bolsa extends Item {
 		return null;
 	}
 	
-	@Override
-	public int getEspacio() {
+	public int getEspacioDisponible() {
 		return(this.capacidad - this.getEspacioOcupado());
 	}
 	
-	public int getEspacioMasGrandeDisponible() {
-	    return this.items.stream()
-	        .map(Item::getEspacio)
-	        .max(Integer::compare)
-	        .orElse(0);
-	} //Version de gepcimus
-
-	
-	/*
-	public int getEspacioMasGrandeDisponible() {
-		Item bolsaMax = this.items.stream()
-						.max((i1, i2) -> Integer.compare(i1.getEspacio(), i2.getEspacio()))
-						.orElse(null);
-		if(bolsaMax != null) {
-			return bolsaMax.getEspacio();
+	@Override
+	public int getEspacioMasGrandeDisponible(int espacioMax) {
+		int espacioAct;
+		for (Item i: this.items) {
+			espacioAct = i.getEspacioMasGrandeDisponible(espacioMax);
+			if(espacioAct > espacioMax) {
+				espacioMax = espacioAct;
+			}
 		}
-		return 0;
+		espacioAct = this.getEspacioDisponible();
+		if(espacioAct > espacioMax) {
+			espacioMax = espacioAct;
+		}
+		return espacioMax;
 	}
-	La cagada aca es que no puedo tirar el .getEspacio() despues del .orElse(null) porque si es null
-	tira excepción
-	*/
 	
-	public int getEspacioTotalDisponible() {
-		return this.items.stream()
-						.mapToInt(i -> i.getEspacio()).sum();
+	@Override
+	protected int getEspacioTotalDisponible() {
+		int espacioTotal = this.getEspacioDisponible();
+		for(Item i: this.items) {
+			espacioTotal += i.getEspacioTotalDisponible();
+		}
+		return espacioTotal;
 	}
 }

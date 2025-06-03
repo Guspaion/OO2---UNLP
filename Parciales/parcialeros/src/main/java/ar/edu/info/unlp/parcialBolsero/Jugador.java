@@ -18,7 +18,7 @@ public class Jugador {
 	}
 	
 	public int espacioMasGrandeDisponible() {
-		return this.bolsa.getEspacioMasGrandeDisponible();
+		return this.bolsa.getEspacioMasGrandeDisponible(0);
 	}
 	
 	public int espacioTotalDisponible() {

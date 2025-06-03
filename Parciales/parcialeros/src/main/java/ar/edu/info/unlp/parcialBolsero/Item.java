@@ -17,7 +17,21 @@ public abstract class Item {
 		return this.tamaño;
 	}
 	
-	protected abstract boolean agregarItem(Item item);
-	protected abstract Item buscarObjeto(String nombreItem);
-	protected abstract int getEspacio();
+	protected boolean agregarItem(Item item) {
+		return false;
+	}
+	
+	protected Item buscarObjeto(String nombreItem) {
+		if (this.nombre.equals(nombreItem)) {
+			return this;
+		}
+		return null;
+	}
+	
+	protected int getEspacioTotalDisponible() {
+		return 0;
+	}
+	protected int getEspacioMasGrandeDisponible(int espacioMax) {
+		return 0;
+	}
 }
