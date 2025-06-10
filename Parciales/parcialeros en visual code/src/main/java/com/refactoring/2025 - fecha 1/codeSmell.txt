@@ -9,9 +9,9 @@ CODE SMELLS:
 3. Solución: Replace loop with pipeline
 5. Solución: Replace temp with query
 4. Solución: Ya solucionado con los otros refactoring pero basicamente es hacer Extract method
-5. Acá se aplica refactoring to patterns:
+2. Acá se aplica refactoring to patterns:
     Replace type code conditionals with strategy(Enumerar pasos)
-    5.1. Replace type-code with class
-    5.2. Extract Method
-    5.3. Extract parameters
-    5.4. Replace conditional with polymorphism
+    2.1. Replace type-code with class
+    2.2. Extract Method
+    2.3. Extract parameters
+    2.4. Replace conditional with polymorphism
