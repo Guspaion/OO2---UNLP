@@ -1,0 +1,17 @@
+CODE SMELLS:
+1. Duplicate code (Líneas 8 a 16, 24, 27 a 35 y 43)
+2. Switch statements(Type code conditionals - Líneas 6 y 25)
+3. Reinventa la rueda(Líneas 10 a 13 y 29 a 32)
+4. En general el método peca de ser muy largo(Long method)
+5. Variables temporales innecesarias(Líneas 10, 20, 31 y 39)
+
+1. Solución: Extract method
+3. Solución: Replace loop with pipeline
+5. Solución: Replace temp with query
+4. Solución: Ya solucionado con los otros refactoring pero basicamente es hacer Extract method
+5. Acá se aplica refactoring to patterns:
+    Replace type code conditionals with strategy(Enumerar pasos)
+    5.1. Replace type-code with class
+    5.2. Extract Method
+    5.3. Extract parameters
+    5.4. Replace conditional with polymorphism
