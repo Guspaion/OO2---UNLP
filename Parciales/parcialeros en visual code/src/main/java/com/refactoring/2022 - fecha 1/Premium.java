@@ -1,4 +1,4 @@
-public Premium implements EstadoCliente {
+public Premium extends EstadoCliente {
     public Premium() {
 
     }
