@@ -1,0 +1,21 @@
+El enunciado solo pide refactorizar el método 'comprar' de la clase Cliente
+
+1. Data Class (Tanto Compra como Producto son clases de datos) [No hace falta refactorizarlo]
+2. Long Method (El metodo comprar de la clase Cliente es largo)
+3. Variables temporales innecesarias (Tanto Compra n como double subtotal y double costoEnvio son variables temporales que solo
+    se utilizan para asignarselas a algo)
+4. Switch statements (State-altering type code conditionals)
+5. Malos nombre de variables (Hay nombre como 'n' para la compra o 'temp' para la tasa de envío que no son apropiados)
+
+Refactors:
+
+2. Esto se solucionará a medida que vayamos avanzando con los otros refactors, pero la solución sería Extract Method.
+3. Solución: Replace Temp with Query
+4. Solución: Replace type conditionals with State:
+    Subpasos:
+        4.1. From type-code extract Class
+        4.2. Extract Subclass
+        4.3. Move Method
+        4.4. Push down Method
+5. Solución: Rename field
+
