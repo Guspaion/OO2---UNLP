@@ -1,5 +1,4 @@
 public class Cliente {
-
     private String nombre;
     private List<Compra> compras;
     private EstadoCliente state;
