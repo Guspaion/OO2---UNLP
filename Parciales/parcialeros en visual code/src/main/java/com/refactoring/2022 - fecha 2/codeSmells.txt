@@ -1,0 +1,14 @@
+CODE SMELLS:
+1. Reinventa la rueda (hace uso de un loop)
+2. Envidia de atributos (Videojuego hace uso de atributos de Personaje para calcular cosas)
+3. Data Class (Personaje es una clase de datos)
+4. Variables temporales innecesarias (las variables temp y daño no son necesarias, además temp no es el mejor nombre para
+ esa variable tampoco)
+5. Switch statements (Type-code conditionals)
+
+Soluciones:
+1. Replace loop with pipeline (Aplicar streams)
+2. Extract Method y Move Method
+3. Move Method
+4. Replace temp with query
+5. Replace conditionals with polymorphism (Por como está planteado el UML no hace falta un Strategy)
