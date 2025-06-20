@@ -3,9 +3,9 @@ public class ReportExcel extends EstrategiaExport {
 
     }
 
-    private void setearContenidoPDF(DocumentFile docFile, Document doc) {
-        PDFExporter exporter = new PDFExporter();
-        docFile.setContent(exporter.generatePDFFile(doc));
+    private void setearContenidoExcel(DocumentFile docFile, Document doc) {
+        ExcelWriter writer = new ExcelWriter();
+        docFile.setContent(writer.generateExcelFile(doc));
     }
 
     public DocumentFile export(Document doc) {
