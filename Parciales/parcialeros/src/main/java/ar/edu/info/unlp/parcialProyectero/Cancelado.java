@@ -1,7 +1,7 @@
 package ar.edu.info.unlp.parcialProyectero;
 
-public class Cancelada extends EstadoProyecto {
-	public Cancelada() {
+public class Cancelado extends EstadoProyecto {
+	public Cancelado() {
 		
 	}
 
@@ -18,5 +18,10 @@ public class Cancelada extends EstadoProyecto {
 	@Override
 	public void cancelarProyecto(Proyecto context) {
 		
+	}
+
+	@Override
+	public String getNombreEstado() {
+		return "Cancelado";
 	}
 }

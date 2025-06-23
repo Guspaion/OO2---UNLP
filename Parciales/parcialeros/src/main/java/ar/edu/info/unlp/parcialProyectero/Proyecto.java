@@ -12,10 +12,9 @@ public class Proyecto {
 	private double montoPagoIntegrantes;
 	private EstadoProyecto estado;
 	
-	public Proyecto(String nombre, LocalDate fIni, LocalDate fFin, String obj, int cantInt, double montoInt) {
+	public Proyecto(String nombre, String obj, int cantInt, double montoInt) {
 		this.nombre = nombre;
-		this.fechaInicio = fIni;
-		this.fechaFin = fFin;
+		this.fechaInicio = LocalDate.now();
 		this.objetivo = obj;
 		this.margenGanancia = 0.07;
 		this.cantIntegrantes = cantInt;
@@ -31,12 +30,20 @@ public class Proyecto {
 		this.margenGanancia = margen;
 	}
 	
+	public void setFechaFin(LocalDate fFin) {
+		this.fechaFin = fFin;
+	}
+	
 	public void setObjetivo(String objetivo) {
 		this.objetivo = objetivo;
 	}
 	
 	public String getObjetivo() {
 		return this.objetivo;
+	}
+	
+	public String getNombreEstado() {
+		return this.estado.getNombreEstado();
 	}
 	
 	public void aprobarEtapa() {

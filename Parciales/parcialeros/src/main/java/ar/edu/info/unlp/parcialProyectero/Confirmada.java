@@ -16,4 +16,9 @@ public class Confirmada extends EstadoProyecto {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public String getNombreEstado() {
+		return "Completada";
+	}
 }

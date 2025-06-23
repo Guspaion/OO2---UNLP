@@ -7,6 +7,7 @@ public class EnEvaluacion extends EstadoProyecto {
 
 	@Override
 	public void aprobarEtapa(Proyecto context) {
+		context.setFechaFin(LocalDate.now());
 		context.setEstado(new Confirmada());
 	}
 
@@ -15,5 +16,10 @@ public class EnEvaluacion extends EstadoProyecto {
 		if(margen >= 0.11 && margen <= 0.15) {
 			context.setMargenGanancia(margen);
 		}
+	}
+
+	@Override
+	public String getNombreEstado() {
+		return "En evaluacion";
 	}
 }

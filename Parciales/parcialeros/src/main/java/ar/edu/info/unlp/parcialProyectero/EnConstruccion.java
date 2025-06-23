@@ -20,4 +20,9 @@ public class EnConstruccion extends EstadoProyecto {
 			context.setMargenGanancia(margen);
 		}
 	}
+
+	@Override
+	public String getNombreEstado() {
+		return "En construccion";
+	}
 }	
