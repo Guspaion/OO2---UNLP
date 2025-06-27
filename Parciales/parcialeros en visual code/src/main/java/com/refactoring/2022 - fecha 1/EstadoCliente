@@ -1,0 +1,6 @@
+public interface EstadoCliente {
+
+    protected abstract double getCostoEnvio(double subtotal);
+    protected abstract void actualizarEstado(Cliente context);
+
+}

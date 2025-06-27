@@ -1,19 +1,15 @@
-public Basico extends EstadoCliente {
+public class Basico extends EstadoCliente {
     public Basico() {
-
+        
     }
 
-    @Override
-    public double getCostoEnvio(double subtotal) {
-        return context.getSubtotal(productos) * 0.1;
+    protected double getCostoEnvio(double subtotal) {
+        return subtotal * 0.1;
     }
 
-    @Override
-    public Compra comprar(Cliente context, List<Producto> productos) {
-        Compra nuevaCompra = super.comprar(context, productos);
+    protected void actualizarEstado(Cliente context) {
         if(context.montoAcumuladoEnCompras() > 5000) {
-            context.setState(new Premium());
+            context.setEstado(new Premium());
         }
-        return nuevaCompra;
     }
 }

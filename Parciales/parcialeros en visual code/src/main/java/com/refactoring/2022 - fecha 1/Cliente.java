@@ -1,31 +1,30 @@
 public class Cliente {
     private String nombre;
+    private EstadoCliente estado;
     private List<Compra> compras;
-    private EstadoCliente state;
 
-    public Cliente(String nombre, EstadoCliente estadoInicial) {
+    public Cliente(String nombre, EstadoCliente estado) {
         this.nombre = nombre;
-        this.estadoInicial = estadoInicial;
+        this.estado = estado;
         this.compras = new ArrayList<Compra>();
+    }
+
+    public void setEstado(EstadoCliente estado) {
+        this.estado = estado;
     }
 
     public double getSubtotal(List<Producto> productos) {
         return productos.stream()
-                        .mapToDouble(p -> p.getPrecio())
-                        .sum();
-    }
-
-    public void addCompra(Compra c) {
-        this.compras.add(c);
+                .mapToDouble(Producto::getPrecio)
+                .sum();
     }
 
     public Compra comprar(List<Producto> productos) {
-        return this.state.comprar(this, productos);
+        Compra compraActual = new Compra(productos, this.getSubtotal(productos), this.estado.getCostoEnvio(this, this.getSubotal(subtotal)));
+        this.compras.add(compraActual);
+        this.estado.actualizarEstado(this);
+        return compraActual;
     }
 
-    public double montoAcumuladoEnCompras() {
-        return this.compras.stream()
-                            .mapToDouble(c -> c.getPrecioTotal())
-                            .sum();
-    }
+    public double montoAcumuladoEnCompras() {...}
 }

@@ -1,0 +1,44 @@
+CODE SMELLS:
+1. Switch Statements (Type-code conditionals)
+2. Data Class: La clase Producto no tiene más funcionalidad que ser una clase contenedora de datos
+3. Reinventa la rueda: El loop for no es necesario ni eficiente para este tipo de tareas
+4. Feature Envy: La clase Pago le pide sus atributos a la clase Producto para realizar cálculos
+5. Duplicate Code: Hay repetición de código al momento de calcular los montos con IVA
+
+SOLUCIONES:
+1. Replace type-code conditionals with Strategy:
+    (1.1) Reemplazo el codigo tipo con clases que definen la jerarquía del Strategy, se crea la clase 'StratPago' y sus subclases:
+        'Efectivo' y 'Tarjeta'
+    (1.2) Muevo la lógica dentro de cada condicional a su subclase correspondiente dentro de la jerarquía del Strategy (Move Method)
+    (1.3) Se define una v.i. en la clase Pago que hace referencia al estado, esta variable reemplazara a la v.i. tipo
+    (1.4) Dejo un método en el contexto que delegue (Será calcularMontoFinal())
+    (1.5) Selecciono parametros que utilizara el Strategy, en este caso, necesitara la lista de productos de la clase Pago
+    (1.6) Se aplica extract parameter para setear el strategy en el constructor, además se crea un setter para el strategy
+    (1.7) Reemplazo condicionales con polimorfismo
+    Una vez realizado esto se nota que queda lógica repetida, esto puede verse en el calculo del monto (calcularMontoFinal()), que es
+    similar para ambas clases, para solucionar esto, se aplicara un template method a partir de los siguientes pasos
+        1. Hago un Extract Method sobre la parte idéntica del método (El cálculo del total), y lo subo a la superclase para que quede
+        generalizado, se borra este método de las superclases, ya que utilizarán la implementación de la superclase
+        2. Hago un extract Method sobre las partes similares y se nombra la firma apropiadamente.
+        Los métodos serán: getTotalConIVA() para el método que es igual y aplicarExtra() para el metodo que diferente.
+        3. Creo el template method en la superclase, mantendrá el nombre calcularMontoFinal(), y tendra los dos metodos ya mencionados,
+        donde aplicarExtra() actuará como el 'hook'
+        4. Se declara aplicarExtra() como un método abstracto, para poder ser redefinido como corresponda
+        5. Se elimina el metodo calulcarMontoFinal() de las superclases, ya que utilizaran la implementación de la superclase, solo
+        quedaría el hook redefinido como se mencionó en el punto 4
+    
+3. Replace loop with pipeline:
+    Se reemplaza el loop for con una operación de streams
+
+4. Extract Method:
+    Del método 'getTotalConIVA()' se extrae la parte que corresponde al cálculo del precio con IVA de un producto
+   Move Method:
+    Una vez extraído ese método, se delega la funcionalidad a la clase Producto
+
+2. Data Class:
+    Una vez resuelta la envidia de atributos también se resuelve este code smell, podría quizá hacerse un Hide Method sobre los getters
+    para limitar un poco el acceso a sus datos, pero en caso lo mantendré como está
+
+5. Duplicate Code:
+    Al igual que antes, al aplicar el Strategy y el Template Method se resuelve también este code smell, su solución hubiese sido
+    Extract Method sobre el código repetido, y luego reemplazar ese código repetido por el llamado al método extraído

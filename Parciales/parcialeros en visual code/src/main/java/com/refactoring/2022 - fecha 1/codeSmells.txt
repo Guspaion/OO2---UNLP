@@ -1,21 +1,27 @@
-El enunciado solo pide refactorizar el método 'comprar' de la clase Cliente
+1. Variables innecesarias: Variables como temp1 o costoEnvio no son necesarias
+2. Switch statements(State-altering conditionals)
+3. Nombres de variables poco explicativos: la instanciación de Compra n tiene un nombre poco claro, al igual que temp1
+4. Long Method: El método comprar es demasiado largo
 
-1. Data Class (Tanto Compra como Producto son clases de datos) [No hace falta refactorizarlo]
-2. Long Method (El metodo comprar de la clase Cliente es largo)
-3. Variables temporales innecesarias (Tanto Compra n como double subtotal y double costoEnvio son variables temporales que solo
-    se utilizan para asignarselas a algo)
-4. Switch statements (State-altering type code conditionals)
-5. Malos nombre de variables (Hay nombre como 'n' para la compra o 'temp' para la tasa de envío que no son apropiados)
+Soluciones:
+3. Rename field:
+    Renombro las variables Compra n -> Compra compraActual y double temp1 -> double tasaEnvio;
 
-Refactors:
+2. Replace state-altering conditional with State:
+    Para llevar a cabo esto se harán los siguientes pasos:
+    2.1 A partir de la v.i. que mantiene el estado se crea la jerarquía del state, una superclase 'EstadoCliente' y se reemplaza la v.i.
+    del tipo con una referencia a la nueva clase State
+    2.2 Se aplica Extract Subclass para a partir de los condicionales que preguntan por el estado crear las subclases correspondientes,
+    estas serán 'Basico', 'Premium' y 'Advance'
+    2.3 Se aplica Move Method sobre los métodos que manejan los condicionales sobre los estados, se mueven a la superclase
+    2.4 Se aplica Push Down Method a las clases de estado concreta, se elimina la lógica condicional, que ya no hace falta, y se define
+    la lógica correspondiente a cada estado, los métodos del estado serán 'actualizarEstado()' y 'getCostoEnvio()'
+    2.5 Se abstractizan los métodos de la superclase para ser definidos en los estados concretos
+    2.6 Se reemplaza la parte condicional del método 'comprar()' de la clase Cliente por llamados a los métodos de la variable que
+    hace referencia al estado
 
-2. Esto se solucionará a medida que vayamos avanzando con los otros refactors, pero la solución sería Extract Method.
-3. Solución: Replace Temp with Query
-4. Solución: Replace type conditionals with State:
-    Subpasos:
-        4.1. From type-code extract Class
-        4.2. Extract Subclass
-        4.3. Move Method
-        4.4. Push down Method
-5. Solución: Rename field
+1. Extract Method + Replace temp with query:
+    Se extrae el método correspondiente al cálculo del subtotal y se reemplaza la variable 'subtotal' por un solo llamado al método, que
+    se llamará getSubtotal()
 
+4. Al realizar los refactorings anteriores, el problema de Long Method se resuelve, en su defecto se hubiese procedido con Extract Method

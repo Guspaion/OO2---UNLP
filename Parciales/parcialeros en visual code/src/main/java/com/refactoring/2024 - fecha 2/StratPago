@@ -1,0 +1,17 @@
+public abstract class StratPago {
+    public StratPago() {
+
+    }
+
+    public double getTotalConIVA(List<Producto> productos) {
+        return productos.stream()
+                .mapToDouble(p -> p.getPrecioConIVA())
+                .sum();
+    }
+
+    public abstract double aplicarExtra(double total);
+
+    public double calcularMontoFinal(List<Producto> productos) {
+        return this.aplicarExtra(this.getTotalConIVA(productos));
+    }
+}
